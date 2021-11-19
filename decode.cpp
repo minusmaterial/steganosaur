@@ -17,10 +17,12 @@ std::string decodeMessage(Image img){
 	output[maxlen-1] = '\0';
 	for(int i = 0; i < maxlen-1; i++){
 		for(int j = 0; j < 8; j++){
-			int bit = img.bytes[bitPosToImageBytePos(8*i+j)] & 1UL << 0;
+			unsigned long bit = img.bytes[bitPosToImageBytePos(8*i+j)] & 1UL;
 				output[i] = setBit(output[i], bit, j);
 		}
-		printf("%c\n", output[i]);
+		if(output[i] == '\0'){
+			break;
+		}
 	}
 	std::string outstr = output;
 	return outstr;
